@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionario STAI – Ecocardiografia Fetale</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f7f7f7;
+            line-height: 1.6;
+        }
+        header {
+            background: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        .container {
+            max-width: 900px;
+            margin: 1rem auto 2rem;
+            background: white;
+            padding: 1.5rem;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            margin-top: 2rem;
+            color: #333;
+        }
+        p.instructions {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        .question {
+            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        .question:last-of-type {
+            border-bottom: none;
+        }
+        .question label {
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+        .options {
+            display: flex;
+            gap: 1rem;
+        }
+        .options label {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .result {
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Questionario STAI – Ecocardiografia Fetale</h1>
+    </header>
+    <div class="container">
+        <!-- Questionario PRE -->
+        <h2>Questionario Pre Esame</h2>
+        <p class="instructions">Valutazione dell’ansia prima dell’ecocardiografia fetale.<br>
+            Indichi come si sente in questo momento, prima dell’esame. (1 = Per niente, 2 = Un po’, 3 = Abbastanza, 4 = Molto)
+        </p>
+        <form id="pre-form">
+            <!-- Questions from the PRE questionnaire -->
+            <div class="question">
+                <label>1. Mi sento calma/o.</label>
+                <div class="options">
+                    <label><input type="radio" name="pre_q1" value="1" required>1</label>
+                    <label><input type="radio" name="pre_q1" value="2">2</label>
+                    <label><input type="radio" name="pre_q1" value="3">3</label>
+                    <label><input type="radio" name="pre_q1" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>2. Mi sento tesa/o o nervosa/o.</label>
+                <div class="options">
+                    <label><input type="radio" name="pre_q2" value="1" required>1</label>
+                    <label><input type="radio" name="pre_q2" value="2">2</label>
+                    <label><input type="radio" name="pre_q2" value="3">3</label>
+                    <label><input type="radio" name="pre_q2" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>3. Mi sento a mio agio con l’équipe sanitaria.</label>
+                <div class="options">
+                    <label><input type="radio" name="pre_q3" value="1" required>1</label>
+                    <label><input type="radio" name="pre_q3" value="2">2</label>
+                    <label><input type="radio" name="pre_q3" value="3">3</label>
+                    <label><input type="radio" name="pre_q3" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>4. Mi sento preoccupata/o per la salute del mio bambino.</label>
+                <div class="options">
+                    <label><input type="radio" name="pre_q4" value="1" required>1</label>
+                    <label><input type="radio" name="pre_q4" value="2">2</label>
+                    <label><input type="radio" name="pre_q4" value="3">3</label>
+                    <label><input type="radio" name="pre_q4" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>5. Mi sento sostenuta/o dall’infermiere che ci accoglie.</label>
+                <div class="options">
+                    <label><input type="radio" name="pre_q5" value="1" required>1</label>
+                    <label><input type="radio" name="pre_q5" value="2">2</label>
+                    <label><input type="radio" name="pre_q5" value="3">3</label>
+                    <label><input type="radio" name="pre_q5" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>6. Mi sento fiduciosa/o nell’esame che sto per fare.</label>
+                <div class="options">
+                    <label><input type="radio" name="pre_q6" value="1" required>1</label>
+                    <label><input type="radio" name="pre_q6" value="2">2</label>
+                    <label><input type="radio" name="pre_q6" value="3">3</label>
+                    <label><input type="radio" name="pre_q6" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>7. Mi sento agitata/o pensando a possibili risultati anomali.</label>
+                <div class="options">
+                    <label><input type="radio" name="pre_q7" value="1" required>1</label>
+                    <label><input type="radio" name="pre_q7" value="2">2</label>
+                    <label><input type="radio" name="pre_q7" value="3">3</label>
+                    <label><input type="radio" name="pre_q7" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>8. Mi sento tranquilla/o per come mi è stato spiegato l’esame.</label>
+                <div class="options">
+                    <label><input type="radio" name="pre_q8" value="1" required>1</label>
+                    <label><input type="radio" name="pre_q8" value="2">2</label>
+                    <label><input type="radio" name="pre_q8" value="3">3</label>
+                    <label><input type="radio" name="pre_q8" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>9. Mi sento impaurita/o.</label>
+                <div class="options">
+                    <label><input type="radio" name="pre_q9" value="1" required>1</label>
+                    <label><input type="radio" name="pre_q9" value="2">2</label>
+                    <label><input type="radio" name="pre_q9" value="3">3</label>
+                    <label><input type="radio" name="pre_q9" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>10. Mi sento capita/o nelle mie emozioni.</label>
+                <div class="options">
+                    <label><input type="radio" name="pre_q10" value="1" required>1</label>
+                    <label><input type="radio" name="pre_q10" value="2">2</label>
+                    <label><input type="radio" name="pre_q10" value="3">3</label>
+                    <label><input type="radio" name="pre_q10" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>11. Mi sento serena/o riguardo al personale che eseguirà l’esame.</label>
+                <div class="options">
+                    <label><input type="radio" name="pre_q11" value="1" required>1</label>
+                    <label><input type="radio" name="pre_q11" value="2">2</label>
+                    <label><input type="radio" name="pre_q11" value="3">3</label>
+                    <label><input type="radio" name="pre_q11" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>12. Mi sento confusa/o per le informazioni ricevute.</label>
+                <div class="options">
+                    <label><input type="radio" name="pre_q12" value="1" required>1</label>
+                    <label><input type="radio" name="pre_q12" value="2">2</label>
+                    <label><input type="radio" name="pre_q12" value="3">3</label>
+                    <label><input type="radio" name="pre_q12" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>13. Mi sento sostenuta/o dal mio partner.</label>
+                <div class="options">
+                    <label><input type="radio" name="pre_q13" value="1" required>1</label>
+                    <label><input type="radio" name="pre_q13" value="2">2</label>
+                    <label><input type="radio" name="pre_q13" value="3">3</label>
+                    <label><input type="radio" name="pre_q13" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>14. Mi sento tesa/o fisicamente (battito, respiro, mani).</label>
+                <div class="options">
+                    <label><input type="radio" name="pre_q14" value="1" required>1</label>
+                    <label><input type="radio" name="pre_q14" value="2">2</label>
+                    <label><input type="radio" name="pre_q14" value="3">3</label>
+                    <label><input type="radio" name="pre_q14" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>15. Mi sento rassicurata/o dal contatto con il personale sanitario.</label>
+                <div class="options">
+                    <label><input type="radio" name="pre_q15" value="1" required>1</label>
+                    <label><input type="radio" name="pre_q15" value="2">2</label>
+                    <label><input type="radio" name="pre_q15" value="3">3</label>
+                    <label><input type="radio" name="pre_q15" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>16. Mi sento in ansia.</label>
+                <div class="options">
+                    <label><input type="radio" name="pre_q16" value="1" required>1</label>
+                    <label><input type="radio" name="pre_q16" value="2">2</label>
+                    <label><input type="radio" name="pre_q16" value="3">3</label>
+                    <label><input type="radio" name="pre_q16" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>17. Mi sento accolta/o e ascoltata/o.</label>
+                <div class="options">
+                    <label><input type="radio" name="pre_q17" value="1" required>1</label>
+                    <label><input type="radio" name="pre_q17" value="2">2</label>
+                    <label><input type="radio" name="pre_q17" value="3">3</label>
+                    <label><input type="radio" name="pre_q17" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>18. Mi sento impaziente di conoscere il risultato.</label>
+                <div class="options">
+                    <label><input type="radio" name="pre_q18" value="1" required>1</label>
+                    <label><input type="radio" name="pre_q18" value="2">2</label>
+                    <label><input type="radio" name="pre_q18" value="3">3</label>
+                    <label><input type="radio" name="pre_q18" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>19. Mi sento preparata/o a ciò che mi aspetta.</label>
+                <div class="options">
+                    <label><input type="radio" name="pre_q19" value="1" required>1</label>
+                    <label><input type="radio" name="pre_q19" value="2">2</label>
+                    <label><input type="radio" name="pre_q19" value="3">3</label>
+                    <label><input type="radio" name="pre_q19" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>20. Mi sento preoccupata/o per ciò che potrei scoprire.</label>
+                <div class="options">
+                    <label><input type="radio" name="pre_q20" value="1" required>1</label>
+                    <label><input type="radio" name="pre_q20" value="2">2</label>
+                    <label><input type="radio" name="pre_q20" value="3">3</label>
+                    <label><input type="radio" name="pre_q20" value="4">4</label>
+                </div>
+            </div>
+            <button type="submit">Calcola punteggio Pre</button>
+            <div id="pre-result" class="result"></div>
+        </form>
+
+        <!-- Questionario POST -->
+        <h2>Questionario Post Esame</h2>
+        <p class="instructions">Valutazione dell’ansia dopo l’ecocardiografia fetale e la visione del video informativo.<br>
+            Indichi come si sente ora, dopo l’esame. (1 = Per niente, 2 = Un po’, 3 = Abbastanza, 4 = Molto)
+        </p>
+        <form id="post-form">
+            <!-- Questions from the POST questionnaire -->
+            <div class="question">
+                <label>1. Mi sento calma/o.</label>
+                <div class="options">
+                    <label><input type="radio" name="post_q1" value="1" required>1</label>
+                    <label><input type="radio" name="post_q1" value="2">2</label>
+                    <label><input type="radio" name="post_q1" value="3">3</label>
+                    <label><input type="radio" name="post_q1" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>2. Mi sento rassicurata/o dopo le spiegazioni ricevute.</label>
+                <div class="options">
+                    <label><input type="radio" name="post_q2" value="1" required>1</label>
+                    <label><input type="radio" name="post_q2" value="2">2</label>
+                    <label><input type="radio" name="post_q2" value="3">3</label>
+                    <label><input type="radio" name="post_q2" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>3. Mi sento più consapevole dello scopo dell’esame.</label>
+                <div class="options">
+                    <label><input type="radio" name="post_q3" value="1" required>1</label>
+                    <label><input type="radio" name="post_q3" value="2">2</label>
+                    <label><input type="radio" name="post_q3" value="3">3</label>
+                    <label><input type="radio" name="post_q3" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>4. Mi sento a mio agio con il personale sanitario.</label>
+                <div class="options">
+                    <label><input type="radio" name="post_q4" value="1" required>1</label>
+                    <label><input type="radio" name="post_q4" value="2">2</label>
+                    <label><input type="radio" name="post_q4" value="3">3</label>
+                    <label><input type="radio" name="post_q4" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>5. Mi sento fiduciosa/o nel risultato dell’esame.</label>
+                <div class="options">
+                    <label><input type="radio" name="post_q5" value="1" required>1</label>
+                    <label><input type="radio" name="post_q5" value="2">2</label>
+                    <label><input type="radio" name="post_q5" value="3">3</label>
+                    <label><input type="radio" name="post_q5" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>6. Mi sento soddisfatta/o delle informazioni ricevute.</label>
+                <div class="options">
+                    <label><input type="radio" name="post_q6" value="1" required>1</label>
+                    <label><input type="radio" name="post_q6" value="2">2</label>
+                    <label><input type="radio" name="post_q6" value="3">3</label>
+                    <label><input type="radio" name="post_q6" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>7. Mi sento meno preoccupata/o rispetto a prima.</label>
+                <div class="options">
+                    <label><input type="radio" name="post_q7" value="1" required>1</label>
+                    <label><input type="radio" name="post_q7" value="2">2</label>
+                    <label><input type="radio" name="post_q7" value="3">3</label>
+                    <label><input type="radio" name="post_q7" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>8. Mi sento compresa/o nelle mie paure.</label>
+                <div class="options">
+                    <label><input type="radio" name="post_q8" value="1" required>1</label>
+                    <label><input type="radio" name="post_q8" value="2">2</label>
+                    <label><input type="radio" name="post_q8" value="3">3</label>
+                    <label><input type="radio" name="post_q8" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>9. Mi sento emotivamente più serena/o.</label>
+                <div class="options">
+                    <label><input type="radio" name="post_q9" value="1" required>1</label>
+                    <label><input type="radio" name="post_q9" value="2">2</label>
+                    <label><input type="radio" name="post_q9" value="3">3</label>
+                    <label><input type="radio" name="post_q9" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>10. Mi sento pronta/o ad affrontare eventuali indicazioni future.</label>
+                <div class="options">
+                    <label><input type="radio" name="post_q10" value="1" required>1</label>
+                    <label><input type="radio" name="post_q10" value="2">2</label>
+                    <label><input type="radio" name="post_q10" value="3">3</label>
+                    <label><input type="radio" name="post_q10" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>11. Mi sento tesa/o o nervosa/o.</label>
+                <div class="options">
+                    <label><input type="radio" name="post_q11" value="1" required>1</label>
+                    <label><input type="radio" name="post_q11" value="2">2</label>
+                    <label><input type="radio" name="post_q11" value="3">3</label>
+                    <label><input type="radio" name="post_q11" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>12. Mi sento sostenuta/o dal partner.</label>
+                <div class="options">
+                    <label><input type="radio" name="post_q12" value="1" required>1</label>
+                    <label><input type="radio" name="post_q12" value="2">2</label>
+                    <label><input type="radio" name="post_q12" value="3">3</label>
+                    <label><input type="radio" name="post_q12" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>13. Mi sento riconoscente verso il personale infermieristico.</label>
+                <div class="options">
+                    <label><input type="radio" name="post_q13" value="1" required>1</label>
+                    <label><input type="radio" name="post_q13" value="2">2</label>
+                    <label><input type="radio" name="post_q13" value="3">3</label>
+                    <label><input type="radio" name="post_q13" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>14. Mi sento meno ansiosa/o grazie al video informativo.</label>
+                <div class="options">
+                    <label><input type="radio" name="post_q14" value="1" required>1</label>
+                    <label><input type="radio" name="post_q14" value="2">2</label>
+                    <label><input type="radio" name="post_q14" value="3">3</label>
+                    <label><input type="radio" name="post_q14" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>15. Mi sento più tranquilla/o riguardo alla salute del mio bambino.</label>
+                <div class="options">
+                    <label><input type="radio" name="post_q15" value="1" required>1</label>
+                    <label><input type="radio" name="post_q15" value="2">2</label>
+                    <label><input type="radio" name="post_q15" value="3">3</label>
+                    <label><input type="radio" name="post_q15" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>16. Mi sento rassicurata/o dal comportamento del personale sanitario.</label>
+                <div class="options">
+                    <label><input type="radio" name="post_q16" value="1" required>1</label>
+                    <label><input type="radio" name="post_q16" value="2">2</label>
+                    <label><input type="radio" name="post_q16" value="3">3</label>
+                    <label><input type="radio" name="post_q16" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>17. Mi sento coinvolta/o positivamente nel percorso diagnostico.</label>
+                <div class="options">
+                    <label><input type="radio" name="post_q17" value="1" required>1</label>
+                    <label><input type="radio" name="post_q17" value="2">2</label>
+                    <label><input type="radio" name="post_q17" value="3">3</label>
+                    <label><input type="radio" name="post_q17" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>18. Mi sento pronta/o a condividere con altri la mia esperienza.</label>
+                <div class="options">
+                    <label><input type="radio" name="post_q18" value="1" required>1</label>
+                    <label><input type="radio" name="post_q18" value="2">2</label>
+                    <label><input type="radio" name="post_q18" value="3">3</label>
+                    <label><input type="radio" name="post_q18" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>19. Mi sento soddisfatta/o del percorso comunicativo.</label>
+                <div class="options">
+                    <label><input type="radio" name="post_q19" value="1" required>1</label>
+                    <label><input type="radio" name="post_q19" value="2">2</label>
+                    <label><input type="radio" name="post_q19" value="3">3</label>
+                    <label><input type="radio" name="post_q19" value="4">4</label>
+                </div>
+            </div>
+            <div class="question">
+                <label>20. Mi sento in pace con me stessa/o.</label>
+                <div class="options">
+                    <label><input type="radio" name="post_q20" value="1" required>1</label>
+                    <label><input type="radio" name="post_q20" value="2">2</label>
+                    <label><input type="radio" name="post_q20" value="3">3</label>
+                    <label><input type="radio" name="post_q20" value="4">4</label>
+                </div>
+            </div>
+            <button type="submit">Calcola punteggio Post</button>
+            <div id="post-result" class="result"></div>
+        </form>
+    </div>
+    
+    <script>
+        // === Gestione statistiche globali in localStorage ===
+        const STATS_KEY = 'staiStats_v1';
+
+        function initStats() {
+            const stored = localStorage.getItem(STATS_KEY);
+            if (stored) {
+                try {
+                    const parsed = JSON.parse(stored);
+                    if (parsed && Array.isArray(parsed.preSumItems) && parsed.preSumItems.length === 20) {
+                        return parsed;
+                    }
+                } catch (e) {
+                    console.warn('Impossibile leggere staiStats, inizializzo da zero.', e);
+                }
+            }
+            // struttura iniziale
+            return {
+                totalPre: 0,
+                totalPost: 0,
+                preSumItems: Array(20).fill(0),
+                postSumItems: Array(20).fill(0),
+                preCountItems: Array(20).fill(0),
+                postCountItems: Array(20).fill(0)
+            };
+        }
+
+        let staiStats = initStats();
+
+        function saveStats() {
+            localStorage.setItem(STATS_KEY, JSON.stringify(staiStats));
+        }
+
+        // utility: calcola totale e vettore risposte (20 valori)
+        function getAnswersFromForm(form) {
+            const data = new FormData(form);
+            const answers = [];
+            let total = 0;
+            for (let i = 1; i <= 20; i++) {
+                const name = form.id === 'pre-form' ? 'pre_q' + i : 'post_q' + i;
+                const value = parseInt(data.get(name), 10);
+                answers.push(value);
+                total += value;
+            }
+            return { total, answers };
+        }
+
+        function setupQuestionnaire(formId, resultId, type) {
+            const form = document.getElementById(formId);
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const { total, answers } = getAnswersFromForm(form);
+
+                if (type === 'pre') {
+                    staiStats.totalPre += total;
+                    answers.forEach((v, idx) => {
+                        staiStats.preSumItems[idx] += v;
+                        staiStats.preCountItems[idx] += 1;
+                    });
+                } else if (type === 'post') {
+                    staiStats.totalPost += total;
+                    answers.forEach((v, idx) => {
+                        staiStats.postSumItems[idx] += v;
+                        staiStats.postCountItems[idx] += 1;
+                    });
+                }
+
+                saveStats();
+                document.getElementById(resultId).textContent =
+                    'Punteggio totale: ' + total + ' / 80 (dati salvati per il report)';
+
+                // opzionale: reset del form dopo il salvataggio
+                // form.reset();
+            });
+        }
+
+        // attiva la logica per i due questionari
+        setupQuestionnaire('pre-form', 'pre-result', 'pre');
+        setupQuestionnaire('post-form', 'post-result', 'post');
+    </script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Questionario STAI – Ecocardiografia Fetale</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f7f7f7;
+        }
+        header {
+            background: #2e8b57;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 20px auto 40px;
+            background: #fff;
+            padding: 20px 30px 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+        p.instructions {
+            margin-top: 0;
+            color: #555;
+            font-size: 0.95rem;
+        }
+        canvas {
+            max-width: 100%;
+            margin-top: 15px;
+        }
+        code {
+            background: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Report Questionario STAI – Ecocardiografia Fetale</h1>
+        <p>Visualizzazione dei risultati aggregati (tutti i partecipanti)</p>
+    </header>
+
+    <div class="container">
+        <h2>1. Grafico a torta – Punteggi complessivi Pre vs Post</h2>
+        <p class="instructions">
+            Inserisci nel codice i <strong>punteggi totali sommati</strong> di tutti i partecipanti:
+            <code>totalPre</code> (somma dei punteggi pre) e <code>totalPost</code> (somma dei punteggi post).
+            Il grafico mostra la percentuale di ansia totale pre e post rispetto al totale complessivo.
+        </p>
+        <canvas id="piePrePost"></canvas>
+
+        <h2>2. Grafico per singola domanda – Medie Pre vs Post</h2>
+        <p class="instructions">
+            Compila gli array <code>preMeans</code> e <code>postMeans</code> con le <strong>medie</strong> (da 1 a 4)
+            di ogni domanda (1–20) per il pre e per il post. Il grafico mostra il confronto per ciascun item STAI.
+        </p>
+        <canvas id="barQuestions"></canvas>
+    </div>
+
+    
+    <script>
+        // Legge i dati aggregati salvati dal questionario in localStorage
+        const STATS_KEY = 'staiStats_v1';
+
+        function loadStats() {
+            const stored = localStorage.getItem(STATS_KEY);
+            if (!stored) {
+                return null;
+            }
+            try {
+                return JSON.parse(stored);
+            } catch (e) {
+                console.warn('Errore nel parsing di staiStats:', e);
+                return null;
+            }
+        }
+
+        const stats = loadStats();
+
+        let totalPre = 0;
+        let totalPost = 0;
+        let preMeans = Array(20).fill(0);
+        let postMeans = Array(20).fill(0);
+
+        if (stats) {
+            totalPre = stats.totalPre || 0;
+            totalPost = stats.totalPost || 0;
+
+            // calcolo delle medie per singola domanda
+            preMeans = stats.preSumItems.map((sum, idx) => {
+                const count = stats.preCountItems[idx] || 0;
+                return count > 0 ? sum / count : 0;
+            });
+
+            postMeans = stats.postSumItems.map((sum, idx) => {
+                const count = stats.postCountItems[idx] || 0;
+                return count > 0 ? sum / count : 0;
+            });
+        } else {
+            alert('Nessun dato trovato. Compila almeno un questionario per popolare il report.');
+        }
+
+        // === 1. GRAFICO A TORTA PRE VS POST ===
+        const totalSum = totalPre + totalPost;
+        const prePercent = totalSum > 0 ? (totalPre / totalSum) * 100 : 0;
+        const postPercent = totalSum > 0 ? (totalPost / totalSum) * 100 : 0;
+
+        const pieCtx = document.getElementById('piePrePost').getContext('2d');
+        new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Pre esame', 'Post esame'],
+                datasets: [{
+                    data: [prePercent.toFixed(1), postPercent.toFixed(1)]
+                }]
+            },
+            options: {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.parsed + '%';
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Distribuzione percentuale del punteggio STAI complessivo'
+                    }
+                }
+            }
+        });
+
+        // === 2. GRAFICO UNICO PER LE 20 DOMANDE (MEDIE PRE VS POST) ===
+
+        const questionLabels = Array.from({ length: 20 }, (_, i) => 'Domanda ' + (i + 1));
+
+        const barCtx = document.getElementById('barQuestions').getContext('2d');
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: questionLabels,
+                datasets: [
+                    {
+                        label: 'Pre esame (media)',
+                        data: preMeans
+                    },
+                    {
+                        label: 'Post esame (media)',
+                        data: postMeans
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 4,
+                        ticks: {
+                            stepSize: 0.5
+                        },
+                        title: {
+                            display: true,
+                            text: 'Valore medio (1–4)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Item del questionario STAI'
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Confronto delle medie per singola domanda (Pre vs Post)'
+                    },
+                    legend: {
+                        position: 'top'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
